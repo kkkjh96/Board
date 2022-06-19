@@ -32,6 +32,14 @@ public class BoardController extends UiUtils {
 
 	@Autowired
 	private BoardService boardService;
+	
+	@GetMapping(value = "")
+	public String openBoardList1(@ModelAttribute("params") BoardDTO params, Model model) {
+		List<BoardDTO> boardList = boardService.getBoardList(params);
+		model.addAttribute("boardList", boardList);
+
+		return "board/list";
+	}
 
 	@GetMapping(value = "board/write.do")
 	public String openBoardWrite(@ModelAttribute("params") BoardDTO params, @RequestParam(value = "idx", required = false) Long idx, Model model) {
@@ -69,7 +77,7 @@ public class BoardController extends UiUtils {
 		return showMessageWithRedirect("게시글 등록이 완료되었습니다.", "/board/list.do", Method.GET, pagingParams, model);
 	}
 
-	@GetMapping(value = "")
+	@GetMapping(value = "board/list.do")
 	public String openBoardList(@ModelAttribute("params") BoardDTO params, Model model) {
 		List<BoardDTO> boardList = boardService.getBoardList(params);
 		model.addAttribute("boardList", boardList);
