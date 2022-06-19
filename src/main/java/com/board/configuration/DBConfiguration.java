@@ -59,7 +59,7 @@ public class DBConfiguration {
 	}
 
 	@Bean
-	public PlatformTransactionManager transactionManager() {
+	public PlatformTransactionManager transactionManager() throws Exception {
 		return new DataSourceTransactionManager(dataSource());
 	}
 
