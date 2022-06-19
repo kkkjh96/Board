@@ -33,7 +33,7 @@ public class BoardController extends UiUtils {
 	@Autowired
 	private BoardService boardService;
 
-	@GetMapping(value = "/board/write.do")
+	@GetMapping(value = "board/write.do")
 	public String openBoardWrite(@ModelAttribute("params") BoardDTO params, @RequestParam(value = "idx", required = false) Long idx, Model model) {
 		if (idx == null) {
 			model.addAttribute("board", new BoardDTO());
@@ -51,7 +51,7 @@ public class BoardController extends UiUtils {
 		return "board/write";
 	}
 
-	@PostMapping(value = "/board/register.do")
+	@PostMapping(value = "board/register.do")
 	public String registerBoard(final BoardDTO params, final MultipartFile[] files, Model model) {
 		Map<String, Object> pagingParams = getPagingParams(params);
 		try {
@@ -69,7 +69,7 @@ public class BoardController extends UiUtils {
 		return showMessageWithRedirect("게시글 등록이 완료되었습니다.", "/board/list.do", Method.GET, pagingParams, model);
 	}
 
-	@GetMapping(value = "/board/list.do")
+	@GetMapping(value = "board/list.do")
 	public String openBoardList(@ModelAttribute("params") BoardDTO params, Model model) {
 		List<BoardDTO> boardList = boardService.getBoardList(params);
 		model.addAttribute("boardList", boardList);
@@ -77,7 +77,7 @@ public class BoardController extends UiUtils {
 		return "board/list";
 	}
 
-	@GetMapping(value = "/board/view.do")
+	@GetMapping(value = "board/view.do")
 	public String openBoardDetail(@ModelAttribute("params") BoardDTO params, @RequestParam(value = "idx", required = false) Long idx, Model model) {
 		if (idx == null) {
 			return showMessageWithRedirect("올바르지 않은 접근입니다.", "/board/list.do", Method.GET, null, model);
@@ -95,7 +95,7 @@ public class BoardController extends UiUtils {
 		return "board/view";
 	}
 
-	@PostMapping(value = "/board/delete.do")
+	@PostMapping(value = "board/delete.do")
 	public String deleteBoard(@ModelAttribute("params") BoardDTO params, @RequestParam(value = "idx", required = false) Long idx, Model model) {
 		if (idx == null) {
 			return showMessageWithRedirect("올바르지 않은 접근입니다.", "/board/list.do", Method.GET, null, model);
@@ -117,7 +117,7 @@ public class BoardController extends UiUtils {
 		return showMessageWithRedirect("게시글 삭제가 완료되었습니다.", "/board/list.do", Method.GET, pagingParams, model);
 	}
 
-	@GetMapping("/board/download.do")
+	@GetMapping("board/download.do")
 	public void downloadAttachFile(@RequestParam(value = "idx", required = false) final Long idx, Model model, HttpServletResponse response) {
 
 		if (idx == null) throw new RuntimeException("올바르지 않은 접근입니다.");

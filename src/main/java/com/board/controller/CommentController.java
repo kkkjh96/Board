@@ -29,7 +29,7 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 
-	@RequestMapping(value = { "/comments", "/comments/{idx}" }, method = { RequestMethod.POST, RequestMethod.PATCH })
+	@RequestMapping(value = { "comments", "comments/{idx}" }, method = { RequestMethod.POST, RequestMethod.PATCH })
 	public JsonObject registerComment(@PathVariable(value = "idx", required = false) Long idx, @RequestBody final CommentDTO params) {
 
 		JsonObject jsonObj = new JsonObject();
@@ -48,7 +48,7 @@ public class CommentController {
 		return jsonObj;
 	}
 
-	@GetMapping(value = "/comments/{boardIdx}")
+	@GetMapping(value = "comments/{boardIdx}")
 	public JsonObject getCommentList(@PathVariable("boardIdx") Long boardIdx, @ModelAttribute("params") CommentDTO params) {
 
 		JsonObject jsonObj = new JsonObject();
@@ -63,7 +63,7 @@ public class CommentController {
 		return jsonObj;
 	}
 
-	@DeleteMapping(value = "/comments/{idx}")
+	@DeleteMapping(value = "comments/{idx}")
 	public JsonObject deleteComment(@PathVariable("idx") final Long idx) {
 
 		JsonObject jsonObj = new JsonObject();
